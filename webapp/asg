@@ -1,9 +1,9 @@
 #Create a launch configuration
-resource "aws_launch_configuration" "mytest_lc" {
-name_prefix = "mytest-lc-"
+resource "aws_launch_configuration" "test_lc" {
+name_prefix = "test-lc-"
 image_id = var.ami_id
 instance_type = var.instance_type
-security_groups = [aws_security_group.mytest_sg.id]
+security_groups = [aws_security_group.test_sg.id]
 key_name = var.key_name
 associate_public_ip_address = true
 
@@ -22,15 +22,15 @@ create_before_destroy = true
 }
 
 #Create an auto-scaling group
-resource "aws_autoscaling_group" "mytest_asg" {
-name = "mytest-asg"
-vpc_zone_identifier = [aws_subnet.mytest_subnet_1.id, aws_subnet.mytest_subnet_2.id]
-launch_configuration = aws_launch_configuration.mytest_lc.id
+resource "aws_autoscaling_group" "test_asg" {
+name = "test-asg"
+vpc_zone_identifier = [aws_subnet.test_subnet_1.id, aws_subnet.test_subnet_2.id]
+launch_configuration = aws_launch_configuration.test_lc.id
 min_size=var.min_size
 max_size=var.max_size
 desired_capacity = var.desired_capacity
 
-target_group_arns = [aws_lb_target_group.mytest_tg.arn]
+target_group_arns = [aws_lb_target_group.test_tg.arn]
 
 
 lifecycle {
