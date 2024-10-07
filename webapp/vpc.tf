@@ -1,9 +1,9 @@
 # Create VPC 
-resource "aws_vpc" "mytest_vpc" {
+resource "aws_vpc" "test_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "mytest-vpc"
+    Name = "test-vpc"
   }
 }
 
