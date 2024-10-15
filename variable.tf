@@ -36,3 +36,20 @@ variable "instance_count" {
   type        = number
   default     = 1
 }
+
+
+
+output "map1" {
+   value=lookup(var.ami,"us-east-2")
+}
+
+output "list1" {
+   value=element(var.private_subnets,2)
+}
+
+output "list2" {
+    value=var.private_subnets[0]
+}
+
+
+
