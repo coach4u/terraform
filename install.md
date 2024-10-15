@@ -13,4 +13,5 @@ $sudo yum -y install terraform
 
 
 setup aws cli with credentails for terraform to work with aws resources
-aws configure
+
+$aws configure
