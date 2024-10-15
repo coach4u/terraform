@@ -12,6 +12,5 @@ $sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLin
 $sudo yum -y install terraform
 
 
-
 setup aws cli with credentails for terraform to work with aws resources
 aws configure
