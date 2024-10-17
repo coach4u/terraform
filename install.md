@@ -1,9 +1,9 @@
-Installing Terraform.
+#Installing Terraform.
 
-Refer the below link
-https://developer.hashicorp.com/terraform/install
+#Refer the below link
+#https://developer.hashicorp.com/terraform/install
 
-Below steps are for installation of terraform on amazon linux,centos,redhat 
+#Below steps are for installation of terraform on amazon linux,centos,redhat 
 
 $sudo yum install -y yum-utils shadow-utils
 
