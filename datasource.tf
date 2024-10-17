@@ -37,7 +37,7 @@ data "aws_subnets" "default" {
 
 # Data source to fetch existing EC2 key pair (ensure this is correct)
 data "aws_key_pair" "my_key" {
-  key_name = "key121" 
+  key_name = "keyname" 
 
 # Security Group for EC2 instances
 resource "aws_security_group" "example_sg" {
