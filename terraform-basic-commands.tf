@@ -1,4 +1,4 @@
-Terraform commands to get started:
+#Terraform commands to get started:
 
 
 terraform init     (initializes the working directory by downloading provider plugins and configuring the backend. It prepares Terraform for future commands like plan and apply.)
