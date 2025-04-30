@@ -20,7 +20,7 @@ resource "azurerm_linux_virtual_machine" "private_vm" {
     azurerm_network_interface.private_vm_nic.id,
   ]
 
-  admin_password = "Turrraform@987"  # Or use SSH instead (recommended)
+  admin_password = "xxxxxxxxxx"  # Or use SSH instead (recommended)
 
   disable_password_authentication = false
 
