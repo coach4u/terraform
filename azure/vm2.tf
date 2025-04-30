@@ -56,7 +56,7 @@ resource "azurerm_linux_virtual_machine" "public_vm" {
   ]
   size               = "Standard_B1s"
   admin_username     = "azureuser"
-  admin_password     = "Turraform@987"  # Use a secure password in production
+  admin_password     = "xxxxxxxxxxxx"  # Use a secure password in production
   disable_password_authentication = false
 
   os_disk {
