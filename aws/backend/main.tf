@@ -13,14 +13,14 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "sample-terraform-eks-state-bucket"
+  bucket = "test21-terraform-state-bucket"
   lifecycle {
     prevent_destroy = false
   }
 }
 
 resource "aws_dynamodb_table" "dynamodb-table" {
-  name           = "terraform-eks-state-locks"
+  name           = "terraform-state-locks"
   billing_mode   = "PAY_PER_REQUEST"
   hash_key       = "LockID"
 
