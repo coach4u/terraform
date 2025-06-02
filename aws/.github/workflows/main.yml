@@ -1,7 +1,10 @@
 name: Terraform EKS Deployment
 on:
   push:
-    branches: [ "main" ] 
+    branches:
+      - main
+    paths:
+      - 'aws/**' 
 
 jobs:
   terraform:
