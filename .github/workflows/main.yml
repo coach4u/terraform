@@ -28,14 +28,14 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
 
     - name: Terraform Init
-      run: cd aws && terraform init
+      run:  terraform init
 
     - name: Terraform Validate
-      run: cd aws && terraform validate
+      run:  terraform validate
 
     - name: Terraform Plan
-      run: cd aws && terraform plan -var-file="terraform.tfvars"
+      run:  terraform plan -var-file="terraform.tfvars"
 
     - name: Terraform Apply
-      run: cd aws && terraform apply  -auto-approve
+      run:  terraform apply  -auto-approve
       
