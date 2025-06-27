@@ -1,0 +1,38 @@
+pipeline {
+  agent any
+
+  environment {
+    REMOTE_HOST = '172.31.83.63'                    
+    REMOTE_DIR = '/home/ec2-user/terraform-backend' 
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        git url: 'https://github.com/coach4u/terraform.git', branch: 'main'
+      }
+    }
+
+    stage('Run Terraform for Backend Setup') {
+      steps {
+        sshagent(credentials: ['terraform-ssh']) {
+          sh """
+            echo " Creating remote directory"
+            ssh -o StrictHostKeyChecking=no ec2-user@${REMOTE_HOST} 'mkdir -p ${REMOTE_DIR}'
+
+            echo " Copying backend folder to Terraform server"
+            scp -o StrictHostKeyChecking=no -r aws/backend/* ec2-user@${REMOTE_HOST}:${REMOTE_DIR}
+
+            echo " Running Terraform"
+            ssh -o StrictHostKeyChecking=no ec2-user@${REMOTE_HOST} '
+              cd ${REMOTE_DIR} &&
+              terraform init &&
+              terraform plan &&
+              terraform apply -auto-approve
+            '
+          """
+        }
+      }
+    }
+  }
+}
