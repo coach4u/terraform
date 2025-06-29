@@ -1,36 +1,48 @@
 pipeline {
   agent any
 
+  tools {
+    terraform 'Terraform_1.7' // You must define this in Jenkins -> Global Tools
+  }
+
   environment {
-    REMOTE_HOST = '172.31.83.63'                    
-    REMOTE_DIR = '/home/ec2-user/terraform-backend' 
+    BACKEND_DIR = "backend"
+    MAIN_DIR = "aws"
   }
 
   stages {
-    stage('Checkout Code') {
+    stage('Checkout') {
       steps {
-        git url: 'https://github.com/coach4u/terraform.git', branch: 'main'
+        git 'https://github.com/coach4u/terraform.git'
       }
     }
 
-    stage('Run Terraform for Backend Setup') {
+    stage('Create Backend') {
       steps {
-        sshagent(credentials: ['terraform-ssh']) {
-          sh """
-            echo " Creating remote directory"
-            ssh -o StrictHostKeyChecking=no ec2-user@${REMOTE_HOST} 'mkdir -p ${REMOTE_DIR}'
+        dir("${BACKEND_DIR}") {
+          sh '''
+            terraform init
+            terraform apply -auto-approve
+          '''
+        }
+      }
+    }
 
-            echo " Copying backend folder to Terraform server"
-            scp -o StrictHostKeyChecking=no -r aws/backend/* ec2-user@${REMOTE_HOST}:${REMOTE_DIR}
+    stage('Init Infra with Remote Backend') {
+      steps {
+        dir("${MAIN_DIR}") {
+          sh '''
+            terraform init
+            terraform plan
+          '''
+        }
+      }
+    }
 
-            echo " Running Terraform"
-            ssh -o StrictHostKeyChecking=no ec2-user@${REMOTE_HOST} '
-              cd ${REMOTE_DIR} &&
-              terraform init &&
-              terraform plan &&
-              terraform apply -auto-approve
-            '
-          """
+    stage('Apply Infrastructure') {
+      steps {
+        dir("${MAIN_DIR}") {
+          sh 'terraform apply -auto-approve'
         }
       }
     }
