@@ -1,9 +1,9 @@
 pipeline {
   agent any
 
- # tools {
- #   terraform 'Terraform_1.7' // You must define this in Jenkins -> Global Tools
- # }
+ // tools {
+ //   terraform 'Terraform_1.7' // You must define this in Jenkins -> Global Tools
+ // }
 
   environment {
     BACKEND_DIR = "backend"
