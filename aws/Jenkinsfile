@@ -2,7 +2,7 @@ pipeline {
   agent any
 
  // tools {
- //   terraform 'Terraform_1.7' // You must define this in Jenkins -> Global Tools
+ //   terraform 'Terraform_1.7'
  // }
 
   environment {
